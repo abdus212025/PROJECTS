@@ -1,0 +1,23 @@
+%{
+int c = 0, v = 0;  // Initialize counters for consonants (c) and vowels (v)
+%}
+
+%%
+
+[aeiouAEIOU] { v++; }  // Match vowels and increment vowel count (v)
+[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z] { c++; }  // Match consonants and increment consonant count (c)
+. ;  // Ignore any other characters
+
+%%
+
+int yywrap() {
+    return 1;  // Indicate end of input
+}
+
+int main() {
+    printf("Enter string: ");
+    yylex();  // Start lexical analysis
+    printf("Number of vowels: %d\n", v);  // Print number of vowels
+    printf("Number of consonants: %d\n", c);  // Print number of consonants
+    return 0;
+}
